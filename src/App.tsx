@@ -4,7 +4,7 @@ import "./App.css";
 
 
 // 1. 개별 칸(Square)
-function Square({ value, onSquareClick }) {
+function Square({ value, onSquareClick }: { value: string | null; onSquareClick: () => void }) {
   return (
     <button
       className="square"
@@ -21,7 +21,7 @@ export default function Board() {
   const [squares, setSquares] = useState(Array(9).fill(null));
 
 
-  function handleClick(i) {
+  function handleClick(i: number) {
     if (squares[i] || calculateWinner(squares)) return;
 
     const nextSquares = squares.slice();
@@ -98,7 +98,7 @@ export default function Board() {
 
 
 // 3. 승자 계산 로직
-function calculateWinner(squares) {
+function calculateWinner(squares: (string | null)[]) {
   const lines = [
     [0, 1, 2], [3, 4, 5], [6, 7, 8],
     [0, 3, 6], [1, 4, 7], [2, 5, 8],
