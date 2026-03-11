@@ -10,7 +10,7 @@ function Square({ value, onSquareClick }) {
       className="square"
       onClick={onSquareClick}
     >
-      <span style={{color : value=="X" ? "#7842C0" : "#417093"}}>{value}</span>
+      <span style={{ color: value == "X" ? "#7842C0" : "#417093" }}>{value}</span>
     </button>
   );
 }
@@ -20,7 +20,7 @@ export default function Board() {
   const [xIsNext, setXIsNext] = useState(true);
   const [squares, setSquares] = useState(Array(9).fill(null));
 
- 
+
   function handleClick(i) {
     if (squares[i] || calculateWinner(squares)) return;
 
@@ -49,26 +49,28 @@ export default function Board() {
     }
   }, [winner]);
   let status;
-  if(winner=='Draw'){
-    status=`${winner}`;
+  if (winner == 'Draw') {
+    status = `${winner}`;
   }
-  else{
-  status = winner? (
+  else {
+    status = winner ? (
       <>
-      Winner: <span style={{ color : winner == 'X' ? "#7842C0" : "#417093"}}>{winner=="X" ? "X" : "O"}</span>
+        Winner: <span style={{ color: winner == 'X' ? "#7842C0" : "#417093" }}>{winner == "X" ? "X" : "O"}</span>
       </>
     ) : (
-    <>
-    Next player:  <span style={{color : xIsNext ? "#7842C0" : "#417093"}}>{xIsNext ? "X" : "O"}</span>
-    </>
+      <>
+        Next player:  <span style={{ color: xIsNext ? "#7842C0" : "#417093" }}>{xIsNext ? "X" : "O"}</span>
+      </>
     )
 
   }
-  
+
   return (
-    <div id="container" style={{backgroundColor: winner === 'Draw' ? '#cccccc' 
-    : (winner === 'X' || (xIsNext && !winner) ? "rgb(212, 173, 255)" : "#ADF4FF") }}>
-      <h1 style={{color: winner == 'Draw' ? '#000000': (winner == 'X' || (xIsNext && !winner) ? "#7842C0" : "#417093")}}>
+    <div id="container" style={{
+      backgroundColor: winner === 'Draw' ? '#cccccc'
+        : (winner === 'X' || (xIsNext && !winner) ? "rgb(212, 173, 255)" : "#ADF4FF")
+    }}>
+      <h1 style={{ color: winner == 'Draw' ? '#000000' : (winner == 'X' || (xIsNext && !winner) ? "#7842C0" : "#417093") }}>
         Tic-Tac-Toe
       </h1>
       <>
@@ -76,7 +78,7 @@ export default function Board() {
           {status}
         </div>
 
-        <div style={{ display: "grid", gridTemplateColumns: "repeat(3, 60px)", border: "1px solid #000", borderRadius: "9px", overflow: "hidden"}}>
+        <div style={{ display: "grid", gridTemplateColumns: "repeat(3, 60px)", border: "1px solid #000", borderRadius: "9px", overflow: "hidden" }}>
           {squares.map((value, i) => (
             <Square key={i} value={value} onSquareClick={() => handleClick(i)} />
           ))}
@@ -108,9 +110,9 @@ function calculateWinner(squares) {
       return squares[a];
     }
   }
-  if (!squares.includes(null)){
-      return 'Draw';
-    }
-  
+  if (!squares.includes(null)) {
+    return 'Draw';
+  }
+
   return null;
 }
