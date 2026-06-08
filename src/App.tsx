@@ -19,7 +19,7 @@ function Square({ value, onSquareClick }: { value: string | null; onSquareClick:
 export default function Board() {
   const [xIsNext, setXIsNext] = useState(true);
   const [squares, setSquares] = useState(Array(9).fill(null));
-  const [turnEnd, setTurnEnd] = useState(false);
+
 
   function handleClick(i: number) {
     if (squares[i] || calculateWinner(squares)) return;
@@ -28,30 +28,8 @@ export default function Board() {
     nextSquares[i] = xIsNext ? "X" : "O";
 
     setSquares(nextSquares);
-    // function turnstatus(turnEnd:boolean){
-    //   setTurnEnd(!turnEnd);
-    //   return turnEnd;
-    // }
-    // turnstatus(turnEnd);
-
-    fetch('http://localhost:5000/api/target', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        turnEnd: true, 
-        xIsNext: xIsNext
-      })
-    })
-    .then(res => res.json())
-    .then(data => {
-      setTurnEnd(data.turnEnd); 
-      setXIsNext(data.xIsNext);
-    })
-    .catch((error) => console.error("에러 발생:", error));
-    };
-
-
-
+    setXIsNext(!xIsNext);
+  }
 
   function reset() {
     setSquares(Array(9).fill(null));
